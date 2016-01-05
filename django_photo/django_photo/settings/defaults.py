@@ -133,9 +133,9 @@ STATICFILES_FINDERS = (
 )
 
 # Authentication settings
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = ''
-LOGOUT_URL = ''
+LOGIN_REDIRECT_URL = '/user/'
+LOGIN_URL = '/login/facebook/'
+LOGOUT_URL = '/logout/'
 
 
 AUTHENTICATION_BACKENDS = (
