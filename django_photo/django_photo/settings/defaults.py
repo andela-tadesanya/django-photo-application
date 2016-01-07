@@ -136,6 +136,8 @@ STATICFILES_FINDERS = (
 LOGIN_REDIRECT_URL = '/user/'
 LOGIN_URL = '/login/facebook/'
 LOGOUT_URL = '/logout/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/user/'
+SOCIAL_AUTH_LOGIN_URL = '/login/facebook/'
 
 
 AUTHENTICATION_BACKENDS = (

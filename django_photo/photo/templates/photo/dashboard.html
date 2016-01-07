@@ -1,12 +1,22 @@
 {% extends "photo/base.html" %}
 {% block title %}User Dashboard{% endblock title %}
 
+
 {% block main %}
     <p>
-       {% if request.user and not request.user.is_anonymous %}
-         Hello {{ request.user.get_full_name|default:request.user.username }}!
-       {% else %}
-         I don’t think we’ve met before.
-       {% endif %}
+        <ul>
+            {% if user and not user.is_anonymous %}
+                <li>
+                    <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+                </li>
+                <li>
+                    <a href="{% url 'auth:logout' %}?next=/">Logout</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+                </li>
+            {% endif %}
+        </ul>
     </p>
 {% endblock main %}
