@@ -2,24 +2,25 @@
 {% block title %}Home{% endblock title %}
 
 {% block main %}
-    <div>
-        <h1>Django Moments</h1>
-
-        <p>
-            <ul>
-                {% if user and not user.is_anonymous %}
-                    <li>
+    <div class="container demo-1">
+        <div class="content">
+            <div id="large-header" class="large-header">
+                <canvas id="demo-canvas"></canvas>
+                <h1 class="main-title-logo">My Logo</span></h1>
+                <h1 class="main-title-text">Show your solidarity. Stand with the nations of the world suffering from terrorism</h1>
+                <div class="main-title-button">
+                    {% if user and not user.is_anonymous %}
                         <a>Hello {{ user.get_full_name|default:user.username }}!</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'auth:logout' %}?next=/">Logout</a>
-                    </li>
-                {% else %}
-                    <li>
-                        <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </p>
+                        <a class="button" href="{% url 'auth:logout' %}?next=/">Logout</a>
+                    {% else %}
+                        <a class="large button" href="{% url 'social:begin' 'facebook' %}"><i class="fi-social-facebook"></i> Login with Facebook</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="codrops-top clearfix">
+                <a class="" href="https://github.com/andela-tadesanya/django-photo-application/"><span><i class="fi-social-github"></i> My repo on Github</span></a>
+                <a class="" href="#"><span><i class="fi-dollar"></i> Buy me coffee</span></a>
+            </div>
+        </div>
     </div>
 {% endblock main %}

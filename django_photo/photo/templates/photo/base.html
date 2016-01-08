@@ -6,16 +6,37 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- AnimationBackground CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'photo/css/normalize.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'photo/css/demo.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'photo/css/component.css' %}" />
+
+    <!-- Foundation CSS -->
     <link rel="stylesheet" href="{% static 'photo/css/foundation.css' %}"/>
     <link rel="stylesheet" href="{% static 'photo/css/app.css' %}"/>
+
+    <!-- Foundation icons -->
+    <link rel="stylesheet" href="{% static 'photo/foundation-icons/foundation-icons.css' %}" />
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 </head>
 
 <body>
     {% block main %}
     {% endblock main %}
+
+    <!-- Framework JS -->
     <script src="{% static 'photo/js/vendor/jquery.min.js' %}"></script>
     <script src="{% static 'photo/js/vendor/what-input.min.js' %}"></script>
     <script src="{% static 'photo/js/foundation.min.js' %}"></script>
     <script src="{% static 'photo/js/app.js' %}"></script>
+
+    <!-- AnimationBackground JS -->
+    <script src="{% static 'photo/js/TweenLite.min.js' %}"></script>
+    <script src="{% static 'photo/js/EasePack.min.js' %}"></script>
+    <script src="{% static 'photo/js/rAF.js' %}"></script>
+    <script src="{% static 'photo/js/demo-1.js' %}"></script>
 </body>
 </html>
