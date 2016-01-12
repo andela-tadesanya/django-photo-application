@@ -1,4 +1,5 @@
 {% extends "photo/base.html" %}
+{% load staticfiles %}
 {% block title %}Home{% endblock title %}
 
 {% block main %}
@@ -6,7 +7,7 @@
         <div class="content">
             <div id="large-header" class="large-header">
                 <canvas id="demo-canvas"></canvas>
-                <h1 class="main-title-logo">My Logo</span></h1>
+                <img class="main-title-logo" src="{% static 'photo/img/shutterpix-white-shadow.png' %}" alt="shutterpix logo"/>
                 <h1 class="main-title-text">Show your solidarity. Stand with the nations of the world suffering from terrorism</h1>
                 <div class="main-title-button">
                     {% if user and not user.is_anonymous %}

@@ -16,4 +16,6 @@ class DashboardView(View):
     template_name = 'photo/dashboard.html'
 
     def get(self, request):
-        return render(request, self.template_name)
+        social_user = request.user.social_auth.filter(provider='facebook').first()
+        context = {'social_user': social_user}
+        return render(request, self.template_name, context)

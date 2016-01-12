@@ -1,0 +1,67 @@
+{% extends "photo/base.html" %}
+{% load staticfiles %}
+
+{% block title %}User Dashboard{% endblock title %}
+
+{% block main %}
+    <!-- header area begins -->
+    <div class="row align-middle">
+        <div class="small-12 medium-2 columns">
+            <img src="{% static 'photo/img/shutterpix.png' %}" alt="shutterpix logo"/>
+        </div>
+        <div class="small-12 medium-4 columns">
+            
+        </div>
+        <div class="small-12 medium-6 columns">
+            {% if user and not user.is_anonymous %}
+                <p>Logged in as {{ user.get_full_name|default:user.username }}, <a href="{% url 'auth:logout' %}?next=/">Logout</a> <img class="thumbnail" alt="user profile picture" src="http://graph.facebook.com/{{social_user.uid}}/picture?type=small" /></p>
+            {% else %}
+                <p><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></p>
+            {% endif %}
+        </div>
+    </div>
+    <!-- header area ends -->
+
+    <!-- body area begins -->
+    <div class="row">
+        <!-- Sidebar Area begins -->
+        <div class="small-12 medium-4 columns">
+            <a class="button" data-open="uploadModal">UPLOAD IMAGE</a>
+        </div>
+
+        <!-- Main Area begins -->
+        <div class="small-12 medium-8 columns">
+            
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div class="reveal" id="uploadModal" data-reveal>
+        <h1>Photo Upload</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="row">
+                <div class="medium-8 columns">
+                  <label>Photo Caption:
+                    <input type="text" name="caption">
+                  </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="medium-8 columns">
+                  <label>Select Photo:
+                    <input type="file" name="image">
+                  </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="medium-8 columns">
+                    <input type="submit" class="button" value="Submit">
+                </div>
+            </div>
+        </form>
+        <button class="close-button" data-close aria-label="Close reveal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endblock main %}

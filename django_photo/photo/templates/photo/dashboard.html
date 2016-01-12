@@ -1,22 +1,2 @@
-{% extends "photo/base.html" %}
+{% extends "photo/base_dashboard.html" %}
 {% block title %}User Dashboard{% endblock title %}
-
-
-{% block main %}
-    <p>
-        <ul>
-            {% if user and not user.is_anonymous %}
-                <li>
-                    <a>Hello {{ user.get_full_name|default:user.username }}!</a>
-                </li>
-                <li>
-                    <a href="{% url 'auth:logout' %}?next=/">Logout</a>
-                </li>
-            {% else %}
-                <li>
-                    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
-                </li>
-            {% endif %}
-        </ul>
-    </p>
-{% endblock main %}
