@@ -3,6 +3,8 @@ from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from .forms import PhotoForm
+from .models import PhotoModel
 
 
 # Mixins
@@ -34,3 +36,19 @@ class DashboardView(LoginRequiredMixin, View):
         social_user = request.user.social_auth.filter(provider='facebook').first()
         context = {'social_user': social_user}
         return render(request, self.template_name, context)
+
+
+class ImageUploadView(LoginRequiredMixin, View):
+    '''handles image upload'''
+
+    def post(self, request):
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            # set the current user as the owner of the photo before
+            # saving the photo
+            photo = form.save(commit=False)
+            photo.owner = request.user
+            photo.save()
+            return HttpResponseRedirect(reverse('photo:user_home'))
+        else:
+            return HttpResponseRedirect(reverse('photo:user_home'))
