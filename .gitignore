@@ -55,3 +55,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# database migrations
+django_photo/*/migrations/*
+
+# media
+django_photo/*/media/*

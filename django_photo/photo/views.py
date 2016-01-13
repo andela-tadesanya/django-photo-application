@@ -15,6 +15,14 @@ class LoginRequiredMixin(object):
         return login_required(view)
 
 
+# functions
+def get_photos(user):
+    '''returns all photos of a user'''
+
+    photos = PhotoModel.objects.filter(owner=user)
+    return photos
+
+
 # Views
 class HomePageView(View):
     '''handles homepage requests'''
@@ -33,8 +41,13 @@ class DashboardView(LoginRequiredMixin, View):
     template_name = 'photo/dashboard.html'
 
     def get(self, request):
+        # get the 
         social_user = request.user.social_auth.filter(provider='facebook').first()
-        context = {'social_user': social_user}
+
+        # get user's photos
+        photos = get_photos(request.user)
+        context = {'social_user': social_user,
+                   'photos': photos}
         return render(request, self.template_name, context)
 
 

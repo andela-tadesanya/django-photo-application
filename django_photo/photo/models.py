@@ -17,3 +17,8 @@ class PhotoModel(models.Model):
                                         blank=True,
                                         auto_now_add=True)
     owner = models.ForeignKey(User, related_name='photos')
+
+    class Meta:
+        ordering = ['-date_created']
+        verbose_name = 'photo'
+        verbose_name_plural = 'photos'

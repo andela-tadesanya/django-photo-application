@@ -14,7 +14,7 @@
         </div>
         <div class="small-12 medium-6 columns">
             {% if user and not user.is_anonymous %}
-                <p>Logged in as {{ user.get_full_name|default:user.username }}, <a href="{% url 'auth:logout' %}?next=/">Logout</a> <img class="thumbnail" alt="user profile picture" src="http://graph.facebook.com/{{social_user.uid}}/picture?type=small" /></p>
+                <p>Logged in as {{ user.get_full_name|default:user.username }}, <a href="{% url 'auth:logout' %}?next=/">Logout</a> <img class="thumbnail" alt="profile picture" src="http://graph.facebook.com/{{social_user.uid}}/picture?type=small" /></p>
             {% else %}
                 <p><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></p>
             {% endif %}
@@ -23,16 +23,23 @@
     <!-- header area ends -->
 
     <!-- body area begins -->
-    <div class="row">
+    <div class="row align-justify">
         <!-- Sidebar Area begins -->
-        <div class="small-12 medium-4 columns">
+        <div class="small-12 medium-3 columns">
             <a class="button" data-open="uploadModal">UPLOAD IMAGE</a>
+            {% block photo_list %}
+                
+            {% endblock photo_list %}
         </div>
 
         <!-- Main Area begins -->
-        <div class="small-12 medium-8 columns">
             
-        </div>
+            <div class="small-12 medium-8 columns grey">
+                    {% block stage %}
+                        
+                    {% endblock stage %}
+            </div>
+        
     </div>
 
     <!-- Upload Modal -->

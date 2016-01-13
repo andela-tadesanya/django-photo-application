@@ -1,2 +1,16 @@
 {% extends "photo/base_dashboard.html" %}
 {% block title %}User Dashboard{% endblock title %}
+{% block photo_list %}
+    {% for photo in photos %}
+    <div class="highlight">
+        <div class="row">
+            <div class="small-12 medium-6 columns">
+                <img src="{{ photo.photo.url }}" height="80" width="80">
+            </div>
+            <div class="small-12 medium-6 columns">
+                <p><strong>{{ photo.caption }}</strong></p>
+            </div>
+        </div>
+    </div>        
+    {% endfor %}    
+{% endblock photo_list %}
