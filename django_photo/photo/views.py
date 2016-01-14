@@ -44,10 +44,17 @@ class DashboardView(LoginRequiredMixin, View):
         # get the 
         social_user = request.user.social_auth.filter(provider='facebook').first()
 
+        # check if any photo is to be editted
+        staged_photo = None
+        if 'photo' in request.GET:
+            # get object of the photo to be editted
+            staged_photo = PhotoModel.objects.get(id=request.GET['photo'])
+
         # get user's photos
         photos = get_photos(request.user)
         context = {'social_user': social_user,
-                   'photos': photos}
+                   'photos': photos,
+                   'staged_photo': staged_photo}
         return render(request, self.template_name, context)
 
 

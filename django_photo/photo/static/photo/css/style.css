@@ -14,8 +14,13 @@ div {
 
 .highlight :hover {
     background-color: #2ba6cb;
+    color: white;
 }
 
 .grey {
     background-color: #E6E6E6;
+}
+
+.staged_img {
+    max-height: 480px;
 }
