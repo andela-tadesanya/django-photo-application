@@ -1,0 +1,22 @@
+language: python
+python:
+- '2.7'
+install:
+- pip install -r requirements.txt
+- pip install coveralls
+- python django_photo/manage.py makemigrations
+- python django_photo/manage.py migrate
+script: coverage run --source='.' django_photo/manage.py test photo
+after_success: coveralls
+deploy:
+  provider: heroku
+  api_key:
+    secure: CtxoCqO5bXu3svjE/yoKv60rCV+/2PzR1plEHEqV69pjyy1rHyeGdl1px0PFv/iUSZLIY2e7xI0NnanqFeNmDPmGxzoCTM67MQ0mIh9f16lJsgycgqyiaGsZxeVVRF6d2UXWuVgOHS8k2w2uTLFjKuNqlAgRaBollBb0YkXQ3KZbbX6jgJkWZzYbs+aOq1q8rDYEeJuHRxJtVhQvVo1BG20DAaQtdlxg/R0bg1EkWekS513pjEASFg+1eeE6HPTRcSK6mqnmTSjM9jBENprf9pbruxGo3W0pZ2wCTm7KZWz8LvyFYYi4IXGEQDxa0B0vgeUAaqa4qxG3Q5TnoQE9w8gFZ9YBWoylIJhm3NhQUfuEtV6Qvng1ps70wqkN/ug6FvLAG2JnDpayF0gDqkU4nes5iVG/OsGCYYhgbOVvo6J+vkqzztN5HxAqCXKl5+REkyxfeXAcpPpMwnoR7o772QmeoBi8i4Hi5bk23ri5Eo4gVz4XtF8TFYEYFB+RmstinU06sIex5oZXyAw6UwxjexhD+hE/UoOeUGIiR8jqXlAJR3vbuKslS9j99DsFU6z8lwTxA8VCNtskD4xPYn9L0rkbhFeKlc5nLulrrxAwYrrC5HaHYBdhnfhIfnhBf2j1RUMQgs3/daxeYYDj4kQGsICAK2QphZE/no14Nq+9uhg=
+  app: django-bucketlist-application
+  on:
+    repo: andela-tadesanya/django-bucketlist-application
+    branch: master
+  skip_cleanup: true
+  run:
+    - "python django_photo/manage.py makemigrations"
+    - "python django_photo/manage.py migrate"
