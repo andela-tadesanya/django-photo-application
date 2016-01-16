@@ -23,7 +23,15 @@
     {% if staged_photo %}
         <div class="row">
             <div class="small-12 columns">
-                <img class="staged_img" src="{{ staged_photo.photo.url }}">
+                <img class="staged_img float-center" src="{{ staged_photo.display_image }}">
+            </div>
+            <div class="small-12 columns">
+                <a href="{% url 'photo:user_home' %}?photo={{staged_photo.id}}&effect=nigeria" class="button">Nigeria</a>
+                <a href="{% url 'photo:user_home' %}?photo={{staged_photo.id}}&effect=france" class="button">France</a>
+                <a href="{% url 'photo:user_home' %}?photo={{staged_photo.id}}&effect=usa" class="button">USA</a>
+                <a href="{% url 'photo:user_home' %}?photo={{staged_photo.id}}&effect=kenya" class="button">Kenya</a>
+                <a href="{% url 'photo:user_home' %}?photo={{staged_photo.id}}&effect=russia" class="button">Russia</a>
+                <a href="{% url 'photo:user_home' %}?photo={{staged_photo.id}}&effect=double" class="button">Double</a>
             </div>
         </div>    
     {% endif %}

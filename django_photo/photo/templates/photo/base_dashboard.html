@@ -6,15 +6,15 @@
 {% block main %}
     <!-- header area begins -->
     <div class="row align-middle">
-        <div class="small-12 medium-2 columns">
-            <img src="{% static 'photo/img/shutterpix.png' %}" alt="shutterpix logo"/>
+        <div class="small-12 medium-3 columns">
+            <img class="float-center" src="{% static 'photo/img/shutterpix.png' %}" alt="shutterpix logo"/>
         </div>
-        <div class="small-12 medium-4 columns">
+        <div class="small-12 medium-3 columns">
             
         </div>
         <div class="small-12 medium-6 columns">
             {% if user and not user.is_anonymous %}
-                <p>Logged in as {{ user.get_full_name|default:user.username }}, <a href="{% url 'auth:logout' %}?next=/">Logout</a> <img class="thumbnail" alt="profile picture" src="http://graph.facebook.com/{{social_user.uid}}/picture?type=small" /></p>
+                <p class="float-right">Logged in as {{ user.get_full_name|default:user.username }}, <a href="{% url 'auth:logout' %}?next=/">Logout</a> <img class="circular" alt="profile picture" src="http://graph.facebook.com/{{social_user.uid}}/picture?type=small" /></p>
             {% else %}
                 <p><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></p>
             {% endif %}
@@ -26,7 +26,7 @@
     <div class="row align-justify">
         <!-- Sidebar Area begins -->
         <div class="small-12 medium-3 columns">
-            <a class="button" data-open="uploadModal">UPLOAD IMAGE</a>
+            <a class="button float-center" data-open="uploadModal">UPLOAD IMAGE</a>
             {% block photo_list %}
                 
             {% endblock photo_list %}
@@ -34,7 +34,7 @@
 
         <!-- Main Area begins -->
             
-            <div class="small-12 medium-8 columns grey">
+            <div class="small-12 medium-9 columns grey">
                     {% block stage %}
                         
                     {% endblock stage %}

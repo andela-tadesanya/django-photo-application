@@ -5,6 +5,10 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from .forms import PhotoForm
 from .models import PhotoModel
+from PIL import Image
+import os
+import shutil
+from .effects import double, nigeria, france, usa, kenya, russia
 
 
 # Mixins
@@ -15,12 +19,55 @@ class LoginRequiredMixin(object):
         return login_required(view)
 
 
-# functions
+# helper functions
 def get_photos(user):
     '''returns all photos of a user'''
 
     photos = PhotoModel.objects.filter(owner=user)
     return photos
+
+
+def create_duplicate_file(image_file_path, image_file_url):
+    '''creates a duplicate file for editting'''
+    # create temporary file path
+    root, ext = os.path.splitext(image_file_path)
+    root = root + '_temp'
+    temp_file_path = root + ext
+
+    # create temporary file url
+    root, ext = os.path.splitext(image_file_url)
+    root = root + '_temp'
+    temp_file_url = root + ext
+
+    # create a duplicate of the image file
+    shutil.copy2(image_file_path, temp_file_path)
+
+    # return the new file path
+    return temp_file_path, temp_file_url
+
+
+def photo_effect(effect, temp_file_path, temp_file_url):
+    '''applies a photo effect on a temporary file'''
+    if effect == 'double':
+        double(temp_file_path)
+        return temp_file_url
+    elif effect == 'france':
+        france(temp_file_path)
+        return temp_file_url
+    elif effect == 'kenya':
+        kenya(temp_file_path)
+        return temp_file_url
+    elif effect == 'nigeria':
+        nigeria(temp_file_path)
+        return temp_file_url
+    elif effect == 'russia':
+        russia(temp_file_path)
+        return temp_file_url
+    elif effect == 'usa':
+        usa(temp_file_path)
+        return temp_file_url
+    else:
+        return None
 
 
 # Views
@@ -41,7 +88,7 @@ class DashboardView(LoginRequiredMixin, View):
     template_name = 'photo/dashboard.html'
 
     def get(self, request):
-        # get the 
+        # get the user's social details
         social_user = request.user.social_auth.filter(provider='facebook').first()
 
         # check if any photo is to be editted
@@ -49,6 +96,19 @@ class DashboardView(LoginRequiredMixin, View):
         if 'photo' in request.GET:
             # get object of the photo to be editted
             staged_photo = PhotoModel.objects.get(id=request.GET['photo'])
+
+
+            # set original image as image to be displayed
+            staged_photo.display_image = staged_photo.photo.url
+
+        # check if any effect are to be applied
+        if 'effect' in request.GET:
+            # create a temporary image to use for editting
+            staged_photo.temp_file_path, staged_photo.temp_file_url = create_duplicate_file(staged_photo.photo.path, staged_photo.photo.url)
+            staged_photo.temp_file_url = photo_effect(request.GET['effect'], staged_photo.temp_file_path, staged_photo.temp_file_url)
+
+            # set temporary image as image to be displayed
+            staged_photo.display_image = staged_photo.temp_file_url
 
         # get user's photos
         photos = get_photos(request.user)

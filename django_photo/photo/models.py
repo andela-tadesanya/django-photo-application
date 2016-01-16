@@ -18,6 +18,10 @@ class PhotoModel(models.Model):
                                         auto_now_add=True)
     owner = models.ForeignKey(User, related_name='photos')
 
+    temp_file_url = None
+    temp_file_path = None
+    display_image = None
+
     class Meta:
         ordering = ['-date_created']
         verbose_name = 'photo'
