@@ -12,9 +12,9 @@ deploy:
   provider: heroku
   api_key:
     secure: pa/ty9UlniS/Jseh/aV3hAV9m5E990ILgu09XnVJZEQJkJjvuSOczM0LUTEufHOBcCB+Lh+vanrfya8CVBc8anN3/aIqnUlq2bOcmvKjhu3nHSzStm1H4pgLOUjR+Q4c8wmmtBmrSHEacFbDckJMw6gWspsqyATsDWjhNHWAYXm+UaUf+VUa2VgKFYhp6YQ7f+J2WsYDa8W8o7KsaMxTvUL1aMnnSHsGYf25CbHfQo1rrNLg9r/fP3rVyHcegTw9v2XFgIThb5iTizeYzUoemfJLLIIfR2gHeIfP5dUoYyz8rdESBdTD8/fofzF5ASuhMYg2WlxZDCzTeEw/Bi6C2DLc283QDS3pcDaW9axgRgUJu7GlsWnksw2chm8y3MawMNXNcGGU5WM55bbUfTasdlnOW1N18LU7TN8DUcNDUuCDeL4SNaIOgjG0DHtIMnn5S1Cdd2fVAqjSlxQtw1qVNyF5Vl8NHyU4aWDEzYRh3nbYzUZLr8r+Vcg9cuxN4qwYvlv7v2vn3EPUI1OvmcTzSIRSALlVLGdjy1XdJDuF+5jkallLBzxtYOrNgldrw7YYcscVXqGE67LT47x7bIZBCJ63DT6aqXBIx+zWZJECTl4OqVddLfxjM7ljtCzDvClD4My9hL8fKFXPWE0NVtyJxjHPOkoy/e4elC6PAftsaI0=
-  app: shutterpix
-  on:
-    repo: andela-tadesanya/django-photo-application
   run:
     - "python django_photo/manage.py makemigrations"
     - "python django_photo/manage.py migrate"
+  app: shutterpix
+  on:
+    repo: andela-tadesanya/django-photo-application
