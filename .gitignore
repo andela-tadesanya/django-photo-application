@@ -57,7 +57,7 @@ docs/_build/
 target/
 
 # database migrations
-django_photo/*/migrations/*
+# django_photo/*/migrations/*
 
 # media
 django_photo/*/media/*
