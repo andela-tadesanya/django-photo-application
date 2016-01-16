@@ -61,3 +61,6 @@ django_photo/*/migrations/*
 
 # media
 django_photo/*/media/*
+
+# database
+*.db

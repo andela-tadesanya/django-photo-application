@@ -15,3 +15,6 @@ deploy:
   app: shutterpix
   on:
     repo: andela-tadesanya/django-photo-application
+  run:
+    - "python django_photo/manage.py makemigrations"
+    - "python django_photo/manage.py migrate"
