@@ -4,6 +4,25 @@
 {% block title %}User Dashboard{% endblock title %}
 
 {% block main %}
+    <!-- Facebook sdk -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1507209232941864',
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+    
     <!-- header area begins -->
     <div class="row align-middle">
         <div class="small-12 medium-3 columns">
@@ -26,7 +45,7 @@
     <div class="row align-justify">
         <!-- Sidebar Area begins -->
         <div class="small-12 medium-3 columns">
-            <a class="button float-center" data-open="uploadModal">UPLOAD IMAGE</a>
+            <a class="alert button float-center" data-open="uploadModal">UPLOAD IMAGE</a>
             {% block photo_list %}
                 
             {% endblock photo_list %}

@@ -27,9 +27,6 @@
 </head>
 
 <body>
-    {% block main %}
-    {% endblock main %}
-
     <!-- Framework JS -->
     <script src="{% static 'photo/js/vendor/jquery.min.js' %}"></script>
     <script src="{% static 'photo/js/vendor/what-input.min.js' %}"></script>
@@ -41,5 +38,8 @@
     <script src="{% static 'photo/js/EasePack.min.js' %}"></script>
     <script src="{% static 'photo/js/rAF.js' %}"></script>
     <script src="{% static 'photo/js/demo-1.js' %}"></script>
+
+    {% block main %}
+    {% endblock main %}
 </body>
 </html>

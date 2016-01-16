@@ -23,6 +23,10 @@
     {% if staged_photo %}
         <div class="row">
             <div class="small-12 columns">
+                <a href="{{ staged_photo.display_image }}" class="tiny button" download><i class="fi-download"></i> Download</a>
+                <button id="share_button" type="button" class="tiny button float-right"><i class="fi-share"></i> Share</button>
+            </div>
+            <div class="small-12 columns">
                 <img class="staged_img float-center" src="{{ staged_photo.display_image }}">
             </div>
             <div class="small-12 columns">
@@ -33,6 +37,28 @@
                 <a href="{% url 'photo:user_home' %}?photo={{staged_photo.id}}&effect=russia" class="button">Russia</a>
                 <a href="{% url 'photo:user_home' %}?photo={{staged_photo.id}}&effect=double" class="button">Double</a>
             </div>
-        </div>    
+        </div> 
+
+        <!-- facebook sharing -->
+        <script type="text/javascript">
+            var urlPrefix = location.protocol + '//' + location.host + '{{staged_photo.display_image}}';
+            $(document).ready(function(){
+            $('#share_button').click(function(e){
+                console.log(urlPrefix);
+            e.preventDefault();
+            FB.ui(
+              {
+                method: 'feed',
+                display: 'popup',
+                caption: '{{staged_photo.caption}}',
+                picture: urlPrefix,
+                description: 'Created using ShutterPix'
+              },
+              // callback
+              function(response) {}
+            );
+            });
+            });
+        </script>   
     {% endif %}
 {% endblock stage %}
