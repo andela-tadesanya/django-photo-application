@@ -11,6 +11,17 @@
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="{% static 'photo/js/vendor/jquery.min.js' %}"></script>
 
+    <!-- Framework JS -->
+    <script src="{% static 'photo/js/vendor/what-input.min.js' %}"></script>
+    <script src="{% static 'photo/js/foundation.min.js' %}"></script>
+    <script src="{% static 'photo/js/app.js' %}"></script>
+
+    <!-- AnimationBackground JS -->
+    <script src="{% static 'photo/js/TweenLite.min.js' %}"></script>
+    <script src="{% static 'photo/js/EasePack.min.js' %}"></script>
+    <script src="{% static 'photo/js/rAF.js' %}"></script>
+    <script src="{% static 'photo/js/demo-1.js' %}"></script>
+
     <!-- AnimationBackground CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'photo/css/normalize.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'photo/css/demo.css' %}" />
@@ -31,25 +42,7 @@
 </head>
 
 <body>
-    <!-- Framework JS -->
-    <script src="{% static 'photo/js/vendor/what-input.min.js' %}"></script>
-    <script src="{% static 'photo/js/foundation.min.js' %}"></script>
-    <script src="{% static 'photo/js/app.js' %}"></script>
-
-    <!-- AnimationBackground JS -->
-    <script src="{% static 'photo/js/TweenLite.min.js' %}"></script>
-    <script src="{% static 'photo/js/EasePack.min.js' %}"></script>
-    <script src="{% static 'photo/js/rAF.js' %}"></script>
-    <script src="{% static 'photo/js/demo-1.js' %}"></script>
-
     {% block main %}
     {% endblock main %}
-
-    <script type="text/javascript">
-        if (typeof jQuery != 'undefined') {
-          // jQuery is loaded => print the version
-          alert(jQuery.fn.jquery);
-        }
-    </script>
 </body>
 </html>
