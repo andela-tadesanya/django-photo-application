@@ -21,10 +21,7 @@ div {
 .grey {
     background-color: #E6E6E6;
     border-radius: 7px;
-    /*box-shadow: inset 0px 1px 13px 3px #ABABAB,-1px 0px 3px -10px #DDDDDD;
-    -webkit-box-shadow: inset 0px 1px 13px 3px #ABABAB,-1px 0px 3px -10px #DDDDDD;
-    -moz-box-shadow: inset 0px 1px 13px 3px #ABABAB,-1px 0px 3px -10px #DDDDDD;
-    -o-box-shadow: inset 0px 1px 13px 3px #ABABAB,-1px 0px 3px -10px #DDDDDD;*/
+    min-height: 200px;
 }
 
 .staged_img {
