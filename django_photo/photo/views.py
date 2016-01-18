@@ -3,9 +3,8 @@ from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from .forms import PhotoForm
+from .forms import PhotoForm, DeleteForm
 from .models import PhotoModel
-from PIL import Image
 import os
 import shutil
 from .effects import double, nigeria, france, usa, kenya, russia
@@ -133,5 +132,35 @@ class ImageUploadView(LoginRequiredMixin, View):
             return HttpResponseRedirect(reverse('photo:user_home'))
         else:
             message = 'Error! Both Photo Caption and Select Photo are required'
+            messages.add_message(request, messages.WARNING, message)
+            return HttpResponseRedirect(reverse('photo:user_home'))
+
+
+class DeleteImageView(LoginRequiredMixin, View):
+    ''' handle deletion of images'''
+
+    def post(self, request):
+        form = DeleteForm(request.POST)
+
+        if form.is_valid():
+            photo_id = request.POST['photo_id']
+            original_photo_path = request.POST['orig']
+            temporary_photo_path = request.POST['temp']
+
+            # delete image from database
+            photo = PhotoModel.objects.get(pk=photo_id)
+            photo.delete()
+
+            # delete original and temporary images
+            os.remove(original_photo_path)
+
+            # first check if a temporary image exists
+            if temporary_photo_path != 'None':
+                os.remove(temporary_photo_path)
+
+            # redirect to dashboard
+            return HttpResponseRedirect(reverse('photo:user_home'))
+        else:
+            message = 'Error deleting file'
             messages.add_message(request, messages.WARNING, message)
             return HttpResponseRedirect(reverse('photo:user_home'))

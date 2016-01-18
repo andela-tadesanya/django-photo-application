@@ -12,6 +12,13 @@
             </div>
             <div class="small-12 medium-6 columns">
                 <p><strong>{{ photo.caption }}</strong></p>
+                <form method="post" action="{% url 'photo:delete' %}" id="deleteForm">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{photo.id}}" name="photo_id">
+                    <input type="hidden" value="{{photo.photo.path}}" name="orig">
+                    <input type="hidden" value="{{photo.temp_file_path}}" name="temp">
+                    <button type="submit" form="deleteForm"><i class="fi-trash"></i></button>
+                </form>
             </div>
         </div>
         </a>
@@ -23,7 +30,7 @@
     <div class="row">
         <div class="small-12 columns">
             {% if messages %}
-            <div class="alert callout">
+            <div class="alert callout" data-closable>
                 {% for message in messages %}
                 <p>
                     {{ message }}
