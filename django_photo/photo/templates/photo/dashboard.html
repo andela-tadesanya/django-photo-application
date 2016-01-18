@@ -63,26 +63,6 @@
             </div>
         </div> 
 
-        <!-- facebook sharing -->
-        <script type="text/javascript">
-            var urlPrefix = location.protocol + '//' + location.host + '{{staged_photo.display_image}}';
-            $(document).ready(function(){
-            $('#share_button').click(function(e){
-                console.log(urlPrefix);
-            e.preventDefault();
-            FB.ui(
-              {
-                method: 'feed',
-                display: 'popup',
-                caption: '{{staged_photo.caption}}',
-                picture: urlPrefix,
-                description: 'Created using ShutterPix'
-              },
-              // callback
-              function(response) {}
-            );
-            });
-            });
-        </script>   
+          
     {% endif %}
 {% endblock stage %}

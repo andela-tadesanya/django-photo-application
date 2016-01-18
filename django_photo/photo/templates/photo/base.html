@@ -27,10 +27,51 @@
 </head>
 
 <body>
+    <!-- Facebook sdk -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1507209232941864',
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     {% block main %}
     {% endblock main %}
     <!-- jquery -->
     <script src="{% static 'photo/js/vendor/jquery.min.js' %}"></script>
+
+    <!-- facebook sharing -->
+    <script type="text/javascript">
+        var urlPrefix = location.protocol + '//' + location.host + '{{staged_photo.display_image}}';
+        $(document).ready(function(){
+        $('#share_button').click(function(e){
+            console.log(urlPrefix);
+        e.preventDefault();
+        FB.ui(
+          {
+            method: 'feed',
+            display: 'popup',
+            caption: '{{staged_photo.caption}}',
+            picture: urlPrefix,
+            description: 'Created using ShutterPix'
+          },
+          // callback
+          function(response) {}
+        );
+        });
+        });
+    </script> 
 
     <!-- Framework JS -->
     <script src="{% static 'photo/js/vendor/what-input.min.js' %}"></script>
