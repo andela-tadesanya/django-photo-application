@@ -9,6 +9,7 @@ from PIL import Image
 import os
 import shutil
 from .effects import double, nigeria, france, usa, kenya, russia
+from django.contrib import messages
 
 
 # Mixins
@@ -131,4 +132,6 @@ class ImageUploadView(LoginRequiredMixin, View):
             photo.save()
             return HttpResponseRedirect(reverse('photo:user_home'))
         else:
+            message = 'Error! Both Photo Caption and Select Photo are required'
+            messages.add_message(request, messages.WARNING, message)
             return HttpResponseRedirect(reverse('photo:user_home'))

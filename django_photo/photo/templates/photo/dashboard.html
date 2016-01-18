@@ -20,6 +20,23 @@
 {% endblock photo_list %}
 
 {% block stage %}
+    <div class="row">
+        <div class="small-12 columns">
+            {% if messages %}
+            <div class="alert callout">
+                {% for message in messages %}
+                <p>
+                    {{ message }}
+                </p>
+                {% endfor %}
+                <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+  
     {% if staged_photo %}
         <div class="row">
             <div class="small-12 columns">
