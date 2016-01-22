@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
+from django.utils import timezone
 from .forms import PhotoForm, DeleteForm
 from .models import PhotoModel
 import os
@@ -90,6 +91,7 @@ class DashboardView(LoginRequiredMixin, View):
     def get(self, request):
         # get the user's social details
         social_user = request.user.social_auth.filter(provider='facebook').first()
+        message = {}  # set default message
 
         # check if any photo is to be editted
         staged_photo = None
@@ -109,6 +111,8 @@ class DashboardView(LoginRequiredMixin, View):
 
             # set temporary image as image to be displayed
             staged_photo.display_image = staged_photo.temp_file_url
+            message = {'staged_photo': staged_photo.display_image + '? %s' % (timezone.now())}
+            return JsonResponse(message)
 
         # get user's photos
         photos = get_photos(request.user)
@@ -159,8 +163,8 @@ class DeleteImageView(LoginRequiredMixin, View):
                 os.remove(temporary_photo_path)
 
             # redirect to dashboard
-            return HttpResponseRedirect(reverse('photo:user_home'))
+            message = {'content': 'Photo was deleted successfully', 'status': True}
+            return JsonResponse(message)
         else:
-            message = 'Error deleting file'
-            messages.add_message(request, messages.WARNING, message)
-            return HttpResponseRedirect(reverse('photo:user_home'))
+            message = {'content': 'Error deleting file', 'status': False}
+            return JsonResponse(message)

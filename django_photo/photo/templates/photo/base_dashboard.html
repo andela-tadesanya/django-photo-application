@@ -7,16 +7,24 @@
     
     
     <!-- header area begins -->
-    <div class="row align-middle">
+    <div class="row align-middle header">
         <div class="small-12 medium-3 columns">
             <img class="float-center" src="{% static 'photo/img/shutterpix.png' %}" alt="shutterpix logo"/>
         </div>
-        <div class="small-12 medium-3 columns">
+        <div class="small-12 medium-7 columns">
             
         </div>
-        <div class="small-12 medium-6 columns">
+        <div class="small-12 medium-2 columns">
             {% if user and not user.is_anonymous %}
-                <p class="float-right">Logged in as {{ user.get_full_name|default:user.username }}, <a href="{% url 'auth:logout' %}?next=/">Logout</a> <img class="circular" alt="profile picture" src="http://graph.facebook.com/{{social_user.uid}}/picture?type=small" /></p>
+            <ul class="dropdown menu" data-dropdown-menu>
+              <li>
+                <a href="#"><img class="circular" alt="profile picture" src="http://graph.facebook.com/{{social_user.uid}}/picture?type=small" /></a>
+                <ul class="menu">
+                  <li><a href="#">{{ user.get_full_name|default:user.username }}</a></li>
+                  <li class="logout"><a href="{% url 'auth:logout' %}?next=/">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
             {% else %}
                 <p><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></p>
             {% endif %}
@@ -25,17 +33,25 @@
     <!-- header area ends -->
 
     <!-- body area begins -->
-    <div class="row align-justify">
+    <div class="row align-justify main-body">
         <!-- Sidebar Area begins -->
-        <div class="small-12 medium-3 columns">
-            <a class="alert button float-center" data-open="uploadModal">UPLOAD IMAGE</a>
+        <div class="small-12 medium-3 columns sidebar">
+            <a class="button float-center" data-open="uploadModal"><i class="fi-upload"></i> UPLOAD IMAGE</a>
+            <div class="alert callout sidebar-status" data-closable style="display:none">
+              <br />
+              <p>But when you're done reading it, click the close button in the corner to dismiss this alert.</p>
+              <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
             {% block photo_list %}
                 
             {% endblock photo_list %}
         </div>
 
         <!-- Main Area begins -->   
-        <div class="small-12 medium-9 columns grey">
+        <div class="small-12 medium-9 columns float-right grey">
+                <h4 class="default_text">No Photo Selected</h4>
                 {% block stage %}
                     
                 {% endblock stage %}
@@ -45,28 +61,35 @@
     <!-- Upload Modal -->
     <div class="reveal" id="uploadModal" data-reveal>
         <h1>Photo Upload</h1>
-        <form action="/upload/" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-            <div class="row">
-                <div class="medium-8 columns">
-                  <label>Photo Caption:
-                    <input type="text" name="caption">
-                  </label>
-                </div>
+        <hr class="stage_divider" />
+        <div class="row">
+            <div class="medium-6 columns">
+                <form action="/upload/" method="post" enctype="multipart/form-data" data-abide>
+                {% csrf_token %}
+                    <div class="row">
+                        <div class="small-12 columns">
+                          <label>Photo Caption*:
+                            <input type="text" name="caption" required>
+                            <span class="form-error">This field is required.</span>
+                          </label>
+                          <label>Select Photo*:
+                            <input type="file" name="photo" accept="image/x-png, image/gif, image/jpeg" required>
+                            <span class="form-error">This field is required.</span>
+                          </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="medium-12 columns">
+                            <input type="submit" class="expanded button" value="Submit">
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="row">
-                <div class="medium-8 columns">
-                  <label>Select Photo:
-                    <input type="file" name="photo" accept="image/x-png, image/gif, image/jpeg">
-                  </label>
-                </div>
+            <div class="medium-6 columns">
+                <img class="float-center" src="{% static 'photo/img/shutterpix-icon.png' %}" alt="shutterpix logo"/>
             </div>
-            <div class="row">
-                <div class="medium-8 columns">
-                    <input type="submit" class="button" value="Submit">
-                </div>
-            </div>
-        </form>
+        </div>
+        
         <button class="close-button" data-close aria-label="Close reveal" type="button">
             <span aria-hidden="true">&times;</span>
         </button>
