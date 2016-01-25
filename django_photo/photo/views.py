@@ -49,26 +49,28 @@ def create_duplicate_file(image_file_path, image_file_url):
 
 def photo_effect(effect, temp_file_path, temp_file_url):
     '''applies a photo effect on a temporary file'''
+
     if effect == 'double':
         double(temp_file_path)
-        return temp_file_url
+        return_value = temp_file_url
     elif effect == 'france':
         france(temp_file_path)
-        return temp_file_url
+        return_value = temp_file_url
     elif effect == 'kenya':
         kenya(temp_file_path)
-        return temp_file_url
+        return_value = temp_file_url
     elif effect == 'nigeria':
         nigeria(temp_file_path)
-        return temp_file_url
+        return_value = temp_file_url
     elif effect == 'russia':
         russia(temp_file_path)
-        return temp_file_url
+        return_value = temp_file_url
     elif effect == 'usa':
         usa(temp_file_path)
-        return temp_file_url
+        return_value = temp_file_url
     else:
-        return None
+        return_value = None
+    return return_value
 
 
 # Views
