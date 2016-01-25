@@ -43,11 +43,17 @@ $(document).ready( function () {
         $stagedImg: $('.staged_img'),
         $effectBtns: $('.effects_button'),
         $default_text: $('.default_text'),
+        $downloadBtn: $('#download_btn'),
         loadPhotoInCanvas: function (event) {
             event.preventDefault();
             var $this = $(this);
+            // hide the loader gif
             effectFtr.$loader.removeClass('hide');
+            // set the src in the download button
             var src = $this.find('img').attr('src');
+            photoSel.$downloadBtn.attr('href', src);
+
+            // display the image on stage
             photoSel.$stagedImg.hide().attr('src', src).fadeIn(1200);
             effectFtr.$loader.addClass('hide');
             photoSel.$effectBtns.fadeIn(1200);

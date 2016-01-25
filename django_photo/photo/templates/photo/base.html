@@ -53,16 +53,18 @@
 
     <!-- facebook sharing -->
     <script type="text/javascript">
-        var urlPrefix = location.protocol + '//' + location.host + '{{staged_photo.display_image}}';
         $(document).ready(function(){
         $('#share_button').click(function(e){
+            var $stagedImg = $('.staged_img').attr('src');
+            var urlPrefix = location.protocol + '//' + location.host + $stagedImg;
             console.log(urlPrefix);
+            var $photoCaption = $('.on-display p.photo-caption').text();
         e.preventDefault();
         FB.ui(
           {
             method: 'feed',
             display: 'popup',
-            caption: '{{staged_photo.caption}}',
+            caption: $photoCaption,
             picture: urlPrefix,
             description: 'Created using ShutterPix (http://shutterpix.herokuapp.com/)'
           },

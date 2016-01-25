@@ -11,13 +11,13 @@
                 <img src="{{ photo.photo.url }}" height="80" width="80">
             </div>
             <div class="small-12 medium-8 columns">
-                <p>{{ photo.caption }}</p>
+                <p class="photo-caption">{{ photo.caption }}</p>
                 <form method="post" action="{% url 'photo:delete' %}" id="deleteForm">
                     {% csrf_token %}
                     <input type="hidden" value="{{photo.id}}" name="photo_id">
                     <input type="hidden" value="{{photo.photo.path}}" name="orig">
                     <input type="hidden" value="{{photo.temp_file_path}}" name="temp">
-                    <button class="tiny alert button delete-btn" type="submit" form="deleteForm" data-id="photo-{{ photo.id }}"><i class="fi-trash"></i>  Delete</button>
+                    <button class="small alert button delete-btn" type="submit" form="deleteForm" data-id="photo-{{ photo.id }}"><i class="fi-trash"></i>  Delete</button>
                 </form>
             </div>
         </div>
@@ -48,10 +48,10 @@
         <div class="row">
             <div class="small-12 medium-8 columns staged_photo">
                 <div class="loader hide"></div>
-                <img class="staged_img float-center" src="{{ staged_photo.display_image }}">
+                <img class="staged_img float-center" src="{{ staged_photo.display_image }}" style="display: none;">
             </div>
             <div class="small-12 medium-4 columns effects_button" style="display:none">
-                <a href="{{ staged_photo.display_image }}" class="tiny button" download><i class="fi-download"></i> Download</a>
+                <a id="download_btn" href="{{ staged_photo.display_image }}" class="tiny button" download><i class="fi-download"></i> Download</a>
                 <button id="share_button" type="button" class="tiny button float-right"><i class="fi-share"></i> Share</button>
                 <hr class="stage_divider" />
                 <a href="#" data-url="{% url 'photo:user_home' %}" data-effect="nigeria" class="button effect-btn">Nigeria</a>
