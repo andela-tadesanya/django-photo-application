@@ -19,7 +19,7 @@ class URLTest(unittest.TestCase):
         user.save()
         self.client.login(username='myuser', password='mypass')
         response = self.client.get('/')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_dashboard(self):
         user = User.objects.create_user(username='auser', password='mypass')
