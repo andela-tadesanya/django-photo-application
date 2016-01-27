@@ -8,8 +8,8 @@ WSGI_APPLICATION = 'django_photo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'photo',
+        'NAME': 'django-photo',
         'USER': 'Administrator',
-        'PASSWORD': 'Administrator'
+        'PASSWORD': 'administrator'
     }
 }
