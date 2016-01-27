@@ -80,7 +80,7 @@ class HomePageView(View):
 
     def get(self, request):
         # redirect to user dashboard if user is logged in
-        if request.user.is_authenticated:
+        if request.user and not request.user.is_anonymous:
             return HttpResponseRedirect(reverse('photo:user_home'))
         else:
             return render(request, self.template_name)
