@@ -50,6 +50,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'django_photo.urls'
@@ -140,6 +141,7 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/user/'
 SOCIAL_AUTH_LOGIN_URL = '/login/facebook/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/'
+LOGIN_ERROR_URL = '/'
 
 
 AUTHENTICATION_BACKENDS = (
