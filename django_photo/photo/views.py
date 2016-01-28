@@ -43,7 +43,6 @@ def create_duplicate_file(image_file_path, image_file_url):
     # create a duplicate of the image file
     shutil.copy2(image_file_path, temp_file_path)
 
-    # return the new file path
     return temp_file_path, temp_file_url
 
 
@@ -93,7 +92,7 @@ class DashboardView(LoginRequiredMixin, View):
     def get(self, request):
         # get the user's social details
         social_user = request.user.social_auth.filter(provider='facebook').first()
-        message = {}  # set default message
+        message = {}
 
         # check if any photo is to be editted
         staged_photo = None
@@ -101,11 +100,9 @@ class DashboardView(LoginRequiredMixin, View):
             # get object of the photo to be editted
             staged_photo = PhotoModel.objects.get(id=request.GET['photo'])
 
-
             # set original image as image to be displayed
             staged_photo.display_image = staged_photo.photo.url
 
-        # check if any effect are to be applied
         if 'effect' in request.GET:
             # create a temporary image to use for editting
             staged_photo.temp_file_path, staged_photo.temp_file_url = create_duplicate_file(staged_photo.photo.path, staged_photo.photo.url)
@@ -116,7 +113,6 @@ class DashboardView(LoginRequiredMixin, View):
             message = {'staged_photo': staged_photo.display_image + '? %s' % (timezone.now())}
             return JsonResponse(message)
 
-        # get user's photos
         photos = get_photos(request.user)
         context = {'social_user': social_user,
                    'photos': photos,
@@ -130,8 +126,7 @@ class ImageUploadView(LoginRequiredMixin, View):
     def post(self, request):
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
-            # set the current user as the owner of the photo before
-            # saving the photo
+            # set the current user as the owner of the photo before saving the photo
             photo = form.save(commit=False)
             photo.owner = request.user
             photo.save()
@@ -164,7 +159,6 @@ class DeleteImageView(LoginRequiredMixin, View):
             if temporary_photo_path != 'None':
                 os.remove(temporary_photo_path)
 
-            # redirect to dashboard
             message = {'content': 'Photo was deleted successfully', 'status': True}
             return JsonResponse(message)
         else:

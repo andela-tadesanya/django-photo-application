@@ -11,7 +11,6 @@ def double(source):
 
     original_image = Image.open(source)
 
-    # get heigth and width of original image
     original_width, original_height = original_image.size
 
     # create new image to paste on
@@ -20,13 +19,8 @@ def double(source):
     # paste original image on new image
     editted_image.paste(original_image, (0, 0))
 
-    # blur editted_image
-    # editted_image.filter(ImageFilter.GaussianBlur(radius=2))
-
-    # editted_image.save('blur_lenna.png')
     blurred_original_image = original_image.filter(ImageFilter.GaussianBlur(radius=8))
 
-    # resize original image to 80% of its original size
     resized_original_image = original_image.resize((int(original_width*0.8), int(original_height*0.8)), Image.ANTIALIAS)
 
     # coordinates for resized image in blurred image
@@ -47,7 +41,6 @@ def france(source):
     original_image = Image.open(source)
     flag_image = Image.open(flag)
 
-    # get heigth and width of original image
     original_width, original_height = original_image.size
 
     # resize the flag image to fit the size of the original image
@@ -67,7 +60,6 @@ def kenya(source):
     original_image = Image.open(source)
     flag_image = Image.open(flag)
 
-    # get heigth and width of original image
     original_width, original_height = original_image.size
 
     # resize the flag image to fit the size of the original image
@@ -87,7 +79,6 @@ def nigeria(source):
     original_image = Image.open(source)
     flag_image = Image.open(flag)
 
-    # get heigth and width of original image
     original_width, original_height = original_image.size
 
     # resize the flag image to fit the size of the original image
@@ -107,7 +98,6 @@ def russia(source):
     original_image = Image.open(source)
     flag_image = Image.open(flag)
 
-    # get heigth and width of original image
     original_width, original_height = original_image.size
 
     # resize the flag image to fit the size of the original image
@@ -126,7 +116,6 @@ def usa(source):
     original_image = Image.open(source)
     flag_image = Image.open(flag)
 
-    # get heigth and width of original image
     original_width, original_height = original_image.size
 
     # resize the flag image to fit the size of the original image
