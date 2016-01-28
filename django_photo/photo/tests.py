@@ -28,9 +28,8 @@ class URLTest(unittest.TestCase):
         response = self.client.get('/user/')
         self.assertEqual(response.status_code, 200)
 
-
-class FunctionTest(TestCase):
-    '''tests homepage shows properly'''
+class HelperFunctionTest(TestCase):
+    '''tests helper functions are working properly'''
 
     @classmethod
     def setUpClass(cls):
@@ -53,6 +52,21 @@ class FunctionTest(TestCase):
         path, url = create_duplicate_file(self.image_path, self.image_path)
         self.assertIn('_temp', path)
         self.assertIn('_temp', url)
+
+
+class EffectsTest(TestCase):
+    '''tests effects run properly'''
+
+    @classmethod
+    def setUpClass(cls):
+        cls.image = Image.new('RGBA', size=(500, 500))
+        cls.image.save('test.jpg')
+        cls.image_path = os.path.abspath('test.jpg')
+
+    @classmethod
+    def tearDownClass(cls):
+        os.remove('test.jpg')
+        os.remove('test_temp.jpg')
 
     def test_effect_double(self):
         path, url = create_duplicate_file(self.image_path, self.image_path)
