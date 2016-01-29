@@ -57,8 +57,8 @@
                 <img class="staged_img float-center" src="{{ staged_photo.display_image }}" style="display: none;">
             </div>
             <div class="small-12 medium-4 columns effects_button" style="display:none">
-                <a id="download_btn" href="{{ staged_photo.display_image }}" class="tiny button" download><i class="fi-download"></i> Download</a>
-                <button id="share_button" type="button" class="tiny button float-right"><i class="fi-share"></i> Share</button>
+                <a id="download_btn" href="{{ staged_photo.display_image }}" class="tiny success button" download><i class="fi-download"></i> Download</a>
+                <button id="fb_share_button" type="button" class="tiny button float-right"><i class="fi-share"></i> Share</button>
                 <hr class="stage_divider" />
                 <a href="#" data-url="{% url 'photo:user_home' %}" data-effect="nigeria" class="button effect-btn">Nigeria</a>
                 <a href="#" data-effect="france" class="button effect-btn">France</a>

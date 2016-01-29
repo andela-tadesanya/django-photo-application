@@ -4,15 +4,15 @@
 {% block title %}User Dashboard{% endblock title %}
 
 {% block main %}
-    
-    
+
+
     <!-- header area begins -->
     <div class="row align-middle header">
         <div class="small-12 medium-3 columns">
             <img class="float-center" src="{% static 'photo/img/shutterpix.png' %}" alt="shutterpix logo"/>
         </div>
         <div class="small-12 medium-7 columns">
-            
+
         </div>
         <div class="small-12 medium-2 columns">
             {% if user and not user.is_anonymous %}
@@ -45,15 +45,15 @@
               </button>
             </div>
             {% block photo_list %}
-                
+
             {% endblock photo_list %}
         </div>
 
-        <!-- Main Area begins -->   
+        <!-- Main Area begins -->
         <div class="small-12 medium-9 columns float-right grey">
                 <h4 class="default_text">No Photo Selected</h4>
                 {% block stage %}
-                    
+
                 {% endblock stage %}
         </div>
     </div>
@@ -89,7 +89,7 @@
                 <img class="float-center" src="{% static 'photo/img/shutterpix-icon.png' %}" alt="shutterpix logo"/>
             </div>
         </div>
-        
+
         <button class="close-button" data-close aria-label="Close reveal" type="button">
             <span aria-hidden="true">&times;</span>
         </button>

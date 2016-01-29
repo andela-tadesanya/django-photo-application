@@ -24,6 +24,7 @@
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
 </head>
 
 <body>
@@ -54,7 +55,7 @@
     <!-- facebook sharing -->
     <script type="text/javascript">
         $(document).ready(function(){
-        $('#share_button').click(function(e){
+        $('#fb_share_button').click(function(e){
             var $stagedImg = $('.staged_img').attr('src');
             var urlPrefix = location.protocol + '//' + location.host + $stagedImg;
             console.log(urlPrefix);
@@ -73,7 +74,7 @@
         );
         });
         });
-    </script> 
+    </script>
 
     <!-- Framework JS -->
     <script src="{% static 'photo/js/vendor/what-input.min.js' %}"></script>

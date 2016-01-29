@@ -75,7 +75,7 @@
 	transform: translate3d(-50%,-50%,0);
 }
 
-.demo-1 .main-title, 
+.demo-1 .main-title,
 .demo-3 .main-title {
 	text-transform: uppercase;
 	font-size: 4.2em;
@@ -127,7 +127,7 @@
 }
 
 @media only screen and (max-width : 768px) {
-	.demo-1 .main-title, 
+	.demo-1 .main-title,
 	.demo-3 .main-title,
 	.demo-4 .main-title {
 		font-size: 3em;
