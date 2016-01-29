@@ -9,7 +9,7 @@ environment = {
     "testing": "django_photo.settings.testing"
 }
 
-settings = environment[os.getenv('DJANGO_ENVIRONMENT', 'production')]
+settings = environment[os.getenv('DJANGO_ENVIRONMENT', 'development')]
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings)

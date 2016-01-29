@@ -3,28 +3,34 @@
 {% block title %}User Dashboard{% endblock title %}
 
 {% block photo_list %}
-    {% for photo in photos %}
-    <div id="photo-{{ photo.id }}" class="{% if photo.id == staged_photo.id %}on-display{% else %}highlight{% endif %}">
-        <a href="{% url 'photo:user_home' %}?photo={{ photo.id }}">
-        <div class="row">
-            <div class="small-12 medium-4 columns">
-                <img src="{{ photo.photo.url }}" height="80" width="80">
+    {% if photos %}
+        {% for photo in photos %}
+        <div id="photo-{{ photo.id }}" class="{% if photo.id == staged_photo.id %}on-display{% else %}highlight{% endif %}">
+            <a href="{% url 'photo:user_home' %}?photo={{ photo.id }}">
+            <div class="row">
+                <div class="small-12 medium-4 columns">
+                    <img src="{{ photo.photo.url }}" height="80" width="80">
+                </div>
+                <div class="small-12 medium-8 columns">
+                    <p class="photo-caption">{{ photo.caption }}</p>
+                    <form method="post" action="{% url 'photo:delete' %}" id="deleteForm">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{photo.id}}" name="photo_id">
+                        <input type="hidden" value="{{photo.photo.path}}" name="orig">
+                        <input type="hidden" value="{{photo.temp_file_path}}" name="temp">
+                        <button class="small alert button delete-btn" type="submit" form="deleteForm" data-id="photo-{{ photo.id }}"><i class="fi-trash"></i>  Delete</button>
+                    </form>
+                </div>
             </div>
-            <div class="small-12 medium-8 columns">
-                <p class="photo-caption">{{ photo.caption }}</p>
-                <form method="post" action="{% url 'photo:delete' %}" id="deleteForm">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{photo.id}}" name="photo_id">
-                    <input type="hidden" value="{{photo.photo.path}}" name="orig">
-                    <input type="hidden" value="{{photo.temp_file_path}}" name="temp">
-                    <button class="small alert button delete-btn" type="submit" form="deleteForm" data-id="photo-{{ photo.id }}"><i class="fi-trash"></i>  Delete</button>
-                </form>
-            </div>
+            </a>
+        <hr />
         </div>
-        </a>
-    <hr />          
-    </div>
-    {% endfor %}    
+        {% endfor %}
+    {% else %}
+      <div class="float-center dummy-text">
+        <p>You have no uploaded photos</p>
+      </div>
+    {% endif %}
 {% endblock photo_list %}
 
 {% block stage %}
@@ -44,7 +50,7 @@
         </div>
     </div>
     {% endif %}
-  
+
         <div class="row">
             <div class="small-12 medium-8 columns staged_photo">
                 <div class="loader hide"></div>
@@ -61,5 +67,5 @@
                 <a href="#" data-effect="russia" class="button effect-btn">Russia</a>
                 <a href="#" data-effect="double" class="button effect-btn">Double</a>
             </div>
-        </div> 
+        </div>
 {% endblock stage %}
